@@ -122,18 +122,17 @@ mustContain(indexSrc, "stateVersion: 3", "projection stateVersion 3");
 mustContain(indexSrc, "OPENING_WINDOW", "opening-window scoring");
 mustContain(indexSrc, "RISK_MARKERS", "risk markers");
 
-// ---- 6. One-click install protocol (dsh://) ----
-const PS1_PATH = join(ROOT, "install.ps1");
+// ---- 6. One-click install protocol (dsh://) — Linux / macOS only ----
 const SH_PATH = join(ROOT, "install.sh");
-const ps1 = existsSync(PS1_PATH) ? readFileSync(PS1_PATH, "utf8") : "";
 const sh = existsSync(SH_PATH) ? readFileSync(SH_PATH, "utf8") : "";
-mustContain(ps1, "Software\\Classes\\dsh", "install.ps1: dsh:// protocol registration");
-mustContain(ps1, "DSH_PROFILE", "install.ps1: DSH_PROFILE detection");
-mustContain(ps1, "dsh-infinite-gen-4", "install.ps1: plugin name");
-mustContain(ps1, "Infinite Generation Four v0.4.0", "install.ps1: status-badge version hint");
 mustContain(sh, "DSH_PROFILE", "install.sh: DSH_PROFILE detection");
 mustContain(sh, "Infinite Generation Four v0.4.0", "install.sh: status-badge version hint");
+mustContain(sh, "dsh-infinite-gen-4", "install.sh: plugin name");
 mustContain(readFileSync(join(ROOT, "README.md"), "utf8"), "dsh-infinite-gen-4", "README: Gen-4 plugin id");
+// Linux-only distribution: no Windows installer artifacts may come back
+for (const win of ["install.ps1", "uninstall.ps1", "install.bat"]) {
+  check(!existsSync(join(ROOT, win)), `no Windows installer artifact: ${win}`);
+}
 
 // ---- 7. Summary ----
 const json = process.argv.includes("--json");

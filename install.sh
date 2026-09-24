@@ -2,7 +2,7 @@
 # ============================================================================
 #  dsh-infinite-gen-4  ·  DeepSeek cybersecurity red-team toolkit
 #  "Infinite Generation Four" one-click install script
-#  Target: Linux / macOS (Windows users: run install.ps1)
+#  Target: Linux / macOS only
 # ============================================================================
 #  Usage: chmod +x install.sh && ./install.sh
 #  It will automatically:
@@ -101,8 +101,7 @@ if [[ -d "$DEST_DIR" ]]; then
 fi
 mkdir -p "$DEST_DIR"
 cp -R "$SRC_DIR"/. "$DEST_DIR"/
-rm -rf "$DEST_DIR/.git" "$DEST_DIR/install.sh" "$DEST_DIR/uninstall.sh" \
-       "$DEST_DIR/install.ps1" "$DEST_DIR/uninstall.ps1" 2>/dev/null || true
+rm -rf "$DEST_DIR/.git" "$DEST_DIR/install.sh" "$DEST_DIR/uninstall.sh" 2>/dev/null || true
 ok "Plugin copied to: $DEST_DIR"
 
 # ---------- [3] Back up package.json ----------

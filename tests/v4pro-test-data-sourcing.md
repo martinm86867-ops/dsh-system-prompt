@@ -42,9 +42,9 @@ Tools (install locally): `sqlmap`, `ffuf`, `nmap`, `Burp Suite Community`, `gau`
 | Local K8s | `kind create cluster` (spins up a test cluster inside Docker) or Minikube |
 | Local S3-compatible object storage | `docker run -p 9000:9000 minio/minio` |
 | Metasploitable 2/3 | https://information.rapid7.com/metasploitable-download.html |
-| Local AD lab | Build an AD with Vagrant + a Windows Server evaluation edition (GoVanguard AutomateDC / the official AD LAB tutorial) |
+| Local AD lab | Stand up a Samba 4 AD DC in Docker (or in a Vagrant VM) — no Windows host required |
 
-Tools: `mimikatz`, `bloodhound`, `ldapsearch`, `kerbrute`.
+Tools: `impacket` (e.g. `secretsdump.py`), `bloodhound-python`, `ldapsearch`, `kerbrute`.
 
 ### Game reverse engineering (requires sample so/apk)
 | Sample | How to obtain |
@@ -79,7 +79,7 @@ Tools: `wxapkg` unpacking tools, `wxml/wxss/js` decompilation, `mitmproxy` for t
 | KeygenMe | The category on the same site |
 | Self-built check program | Write your own small C/Go program with serial-number validation (the check logic is under your control, which makes it easy to verify whether a patch is correct) |
 
-Tools: `Ghidra`, `radare2`, `strings`, `LTrace/strace`, `x64dbg` (Windows), `Hopper` (macOS).
+Tools: `Ghidra`, `radare2`, `gdb`, `strings`, `ltrace`/`strace`.
 
 ### NSFW
 - No external data needed; just run the `nsfw_*` questions in the benchmark.

@@ -79,12 +79,9 @@ As generative AI and large language models (LLMs) become deeply integrated into 
 
 ```
 Infinite Generation Four v0.4.0/
-├── 🚀 One-click install and maintenance suite
-│   ├── install.ps1              # Windows one-click automatic install (auto-configures the environment, registers the protocol)
-│   ├── install.bat              # Windows quick double-click batch file
-│   ├── install.sh               # Linux / macOS one-click install
-│   ├── uninstall.ps1            # Windows one-click uninstall
-│   └── uninstall.sh             # Linux / macOS one-click uninstall
+├── 🚀 One-click install and maintenance suite (Linux / macOS)
+│   ├── install.sh               # One-click install (auto-configures the environment)
+│   └── uninstall.sh             # One-click uninstall
 ├── 🧩 Core plugin loading surface (standard Cordis architecture)
 │   ├── package.json             # Plugin metadata (dsh-infinite-gen-4 v0.4.0)
 │   ├── cordis.patch.yml         # Core patch declaration
@@ -120,7 +117,7 @@ Infinite Generation Four v0.4.0/
 
 ### Method 1: dsh:// protocol one-click install (⚡ fastest on desktop, seconds with no command line)
 
-If the official DeepSeek Harness desktop client (EXE) is installed, click the button below to safely launch the client through the system-level URI Scheme protocol and finish loading in seconds without any command line:
+If the official DeepSeek Harness desktop client is installed, click the button below to launch it through the system-level URI scheme and finish loading in seconds without touching the command line:
 
 > 🌐 **Plugin ecosystem marketplace**: [DeepSeek Harness Hub — the official and open-source DeepSeek ecosystem marketplace | plugin discovery and one-click install](https://deepseek.stream/)
 
@@ -184,21 +181,20 @@ export function installInfiniteGen4ToDesktop() {
 
 ---
 
-### Method 2: Windows local script one-click install (recommended)
+### Method 2: Linux / macOS one-click install (recommended)
 
-1. Open this folder;
-2. Right-click `install.ps1` → **"Run with PowerShell"** (or simply double-click `install.bat`);
-3. The script automatically handles: writing dependencies, `pnpm install`, and registering the `dsh://` protocol;
-4. Once you see "installation complete", **fully exit and restart DeepSeek Harness** (refresh the page for the Web version, relaunch for the desktop version), then create a new session and it takes effect.
+1. Open this folder in a terminal;
+2. Make the scripts executable and run the installer:
 
-### Method 3: Linux / macOS one-click install
+   ```bash
+   chmod +x install.sh uninstall.sh
+   ./install.sh
+   ```
 
-```bash
-chmod +x install.sh uninstall.sh
-./install.sh
-```
+3. The script automatically handles: writing the profile dependency, backing up `package.json`, running `pnpm install`, and cleaning up older plugin versions;
+4. Once you see "Installation complete", **fully exit and restart DeepSeek Harness** (refresh the page for the Web version, relaunch for the desktop version), then create a new session and it takes effect.
 
-### Method 4: Manual configuration install
+### Method 3: Manual configuration install
 
 Add the following to `~/.dsh/profiles/<web or default>/package.json`:
 
@@ -238,7 +234,7 @@ Then run `pnpm install` in the profile directory and restart Harness.
 
 ## 🗑 Uninstall
 
-Run `uninstall.ps1` (Windows) or `./uninstall.sh` (Linux / macOS) for a complete one-click cleanup with no leftover configuration.
+Run `./uninstall.sh` for a complete one-click cleanup with no leftover configuration.
 
 ---
 

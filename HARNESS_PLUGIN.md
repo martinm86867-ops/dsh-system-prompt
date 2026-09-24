@@ -43,15 +43,15 @@ All three files have exactly the same SHA256, and `scripts/verify_prompt_gen4.mj
 
 ## Local verification
 
-```powershell
+```bash
 node --check index.js
-node scripts/verify_prompt_gen4.mjs   # 68 items: verbatim kernel payload match + injection slots + projection
-node scripts/verify_prompt.mjs        # 65 items: payload anchors + exports + install protocol + corpus
+node scripts/verify_prompt_gen4.mjs   # 103 assertions: verbatim kernel payload match + injection slots + projection
+node scripts/verify_prompt.mjs        # 61 assertions: payload anchors + exports + install protocol + corpus + Linux-only guard
 ```
 
 ## Install in the desktop Harness
 
-```powershell
+```bash
 # profiles/default/package.json
 "dependencies": {
   "dsh-infinite-gen-4": "file:../../plugins/dsh-infinite-gen-4"
@@ -63,6 +63,6 @@ node scripts/verify_prompt.mjs        # 65 items: payload anchors + exports + in
 }
 ```
 
-Then `cd $env:USERPROFILE\.dsh\profiles\default && pnpm install`, restart the session (or run `install.ps1`).
+Then `cd ~/.dsh/profiles/default && pnpm install`, restart the session (or run `./install.sh`).
 
 Note: if other armor packages that also register system prompt segments are enabled in the same profile, assembly will stack multiple payloads on top of each other; if you want this plugin's payload to take exclusive effect, keep only one of them.
