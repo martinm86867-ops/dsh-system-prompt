@@ -52,6 +52,8 @@ As generative AI and large language models (LLMs) become deeply integrated into 
 > - Injection slots: `infinite-gen-4:global-system-prompt` (Order 100) + `infinite-gen-4:dual-layer-reinforce` (Order 200),
 >   controlled by the `DUAL_LAYER_INJECTION` switch in `index.js` (setting it to `false` gives single-segment injection with equivalent behavior).
 > - Three kernel files under `prompts/` (`infinite-gen-3.md` / `infinite-gen-4.md` / `infinite-gen-4.1-flash.md`)
+>
+> 📐 **Full map of the payload, the injection path, the scorer and the badge:** [PROMPT_MINDMAP.md](PROMPT_MINDMAP.md)
 
 ---
 
@@ -89,6 +91,7 @@ Infinite Generation Four v0.4.0/
 │       └── infinite-gen-4.1-flash.md  # V4.1 reinforced mirror layer (trainer lane + shallow reasoning + metadata extraction)
 ├── 📖 Documentation center
 │   ├── README.md                # Comprehensive main documentation (this file)
+│   ├── PROMPT_MINDMAP.md        # Mindmap + walkthrough of the payload and how it operates
 │   └── LICENSE                  # MIT License
 ├── 🛡️ Deterministic regression test suite
 │   ├── scripts/
