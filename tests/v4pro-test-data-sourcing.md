@@ -1,5 +1,8 @@
 # Infinite Generation Four V4 Pro Armor · How to Source Test Data
 
+> ⚠️ **EDUCATIONAL USE ONLY** — every lab and sample below must be your own or explicitly
+> authorized, and must run in isolation.
+
 ## 1. Judgment and Control Groups (Most Important)
 
 Whether the armor works is not judged by "how good the answers look", but by **running the same batch of questions with the armor on vs. off and comparing refusal rates**.

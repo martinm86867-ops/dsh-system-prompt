@@ -1,7 +1,7 @@
 {
   "name": "dsh-infinite-gen-4",
   "version": "0.4.0",
-  "description": "DeepSeek-V4.1 / V4 Flash cybersecurity red-team toolkit (Infinite Generation Four) v0.4.0: a dual-layer cooperative injection kernel with pure zero-tool-surface direct output, combining a general kernel and a reinforcement-mirror lane, a profile metadata tool, live session projection and a client status badge.",
+  "description": "DeepSeek-V4.1 / V4 Flash cybersecurity red-team toolkit (Infinite Generation Four) v0.4.0: a dual-layer cooperative injection kernel with pure zero-tool-surface direct output, combining a general kernel and a reinforcement-mirror lane, a profile metadata tool, live session projection and a client status badge. EDUCATIONAL USE ONLY.",
   "type": "module",
   "main": "./index.js",
   "repository": {

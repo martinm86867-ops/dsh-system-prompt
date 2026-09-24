@@ -134,6 +134,16 @@ for (const win of ["install.ps1", "uninstall.ps1", "install.bat"]) {
   check(!existsSync(join(ROOT, win)), `no Windows installer artifact: ${win}`);
 }
 
+// ---- 6.5 EDUCATIONAL USE ONLY positioning ----
+// The notice must be present, and no off-project promo material (third-party marketplace
+// links, chat-group IDs, QR-code community invites) may creep back in.
+const readmeSrc = readFileSync(join(ROOT, "README.md"), "utf8");
+mustContain(readmeSrc, "EDUCATIONAL USE ONLY", "README: educational-use-only notice");
+for (const off of ["deepseek.stream", "community.jpg", "338431075", "pd86424753"]) {
+  mustAbsent(readmeSrc, off, `README: no off-project material (${off})`);
+}
+check(!existsSync(join(ROOT, "assets", "community.jpg")), "assets: QR-code invite removed");
+
 // ---- 7. Summary ----
 const json = process.argv.includes("--json");
 if (json) {

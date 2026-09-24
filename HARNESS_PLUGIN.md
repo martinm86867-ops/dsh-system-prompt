@@ -1,5 +1,8 @@
 # DeepSeek Harness Plugin — Infinite Generation Four / dsh-infinite-gen-4 (v0.4.0)
 
+> ⚠️ **EDUCATIONAL USE ONLY.** A teaching and research artifact. Use it only on systems you own or
+> are explicitly authorized to test, and only inside isolated lab environments.
+
 A cybersecurity red-team testing plugin, project name: **Infinite Generation Four**.
 Rebuilt for **DeepSeek-V4.1 / V4-Pro / V4-Flash and MoE architectures**, using a
 **"pure zero-tool-surface direct output + dual-layer cooperative prompt injection + live session projection"** architecture.
@@ -46,7 +49,7 @@ All three files have exactly the same SHA256, and `scripts/verify_prompt_gen4.mj
 ```bash
 node --check index.js
 node scripts/verify_prompt_gen4.mjs   # 103 assertions: verbatim kernel payload match + injection slots + projection
-node scripts/verify_prompt.mjs        # 61 assertions: payload anchors + exports + install protocol + corpus + Linux-only guard
+node scripts/verify_prompt.mjs        # 67 assertions: payload anchors + exports + install protocol + corpus + Linux-only / educational-use-only guards
 ```
 
 ## Install in the desktop Harness

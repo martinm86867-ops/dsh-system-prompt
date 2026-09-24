@@ -107,7 +107,7 @@
             { style: WRAP_STYLE },
             react.createElement(
               "div",
-              { style: badgeStyle, "data-armor": "on", title: "Infinite Generation Four v0.4.0" },
+              { style: badgeStyle, "data-armor": "on", title: "Infinite Generation Four v0.4.0 — EDUCATIONAL USE ONLY" },
               react.createElement("span", { style: dotStyle }),
               react.createElement("span", null, text)
             )

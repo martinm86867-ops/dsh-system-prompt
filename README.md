@@ -10,14 +10,11 @@
   </a>
 </p>
 
-> 🌐 **Plugin ecosystem marketplace**: [DeepSeek Harness Hub — the official and open-source DeepSeek ecosystem marketplace | plugin discovery and one-click install](https://deepseek.stream/)
-
-> ## 💬 DeepSeek community & chat groups
+> ## ⚠️ EDUCATIONAL USE ONLY
 >
-> ### 👉 **Red-team security discussion group 9: `338431075`**
-> ### 👉 **Tencent Channels technical community: `pd86424753`**
->
-> 🔥 Join us to exchange red-team adversarial testing notes, share prompts and evaluation benchmarks, and discuss plugin development and ecosystem building!
+> **EDUCATIONAL USE ONLY.** This project is a teaching and research artifact. Use it only on
+> systems you own or are explicitly authorized to test, and only inside isolated lab environments.
+> Independent open-source project — no affiliation with, or endorsement from, DeepSeek.
 
 ---
 
@@ -31,25 +28,22 @@ As generative AI and large language models (LLMs) become deeply integrated into 
 
 ---
 
-> ### ⚠️ Strict Legal & Compliance Disclaimer
+> ### ⚠️ EDUCATIONAL USE ONLY
 >
-> **【Zero-tolerance statement】**: This project firmly opposes and strictly prohibits any form of illegal or criminal activity! The developers of this project never support, encourage, or assist any unauthorized cyber attack, vulnerability exploitation, data theft, illegal intrusion into computer information systems, or generation of illegal or prohibited content.
+> **EDUCATIONAL USE ONLY.** This project is a cybersecurity teaching and benchmarking artifact —
+> nothing more, and nothing else.
 >
-> 1. **Limited to lawful, controlled scope**: This project (`dsh-infinite-gen-4`) is positioned purely as a cybersecurity red-team research tool and robustness benchmarking suite. **It is strictly forbidden to run this project against targets without the owner's lawful written authorization, against public internet systems, or against production business systems.** All testing activity must be strictly confined to **offline local synthetic fixtures, authorized cybersecurity exercise ranges, and compliant controlled laboratory environments**.
-> 2. **Illegal and prohibited uses are strictly forbidden**: Users must never use this project, directly or indirectly, to engage in:
->    - any act that violates the *Criminal Law of the People's Republic of China* (中华人民共和国刑法), the *Cybersecurity Law of the People's Republic of China* (中华人民共和国网络安全法), the *Data Security Law of the People's Republic of China* (中华人民共和国数据安全法), the *Personal Information Protection Law of the People's Republic of China* (中华人民共和国个人信息保护法), or other laws and regulations;
->    - unauthorized penetration or attack against the computer information systems of public or private organizations, or carrying out ransomware, sabotage, credential stuffing, or distribution of malicious payloads;
->    - inducing, generating, or disseminating any content expressly prohibited by law, including content that endangers national security, terrorism, violence and gore, pornography, gambling, fraud, or infringement of citizens' privacy or intellectual property rights;
->    - violating the Terms of Service or Usage Policy of the relevant large-model providers.
-> 3. **Users bear sole responsibility**: This project is provided "AS-IS" under the MIT open-source license, and the developers make no express or implied warranty as to the software's completeness, security, or fitness for purpose. **Users bear independent and full civil, administrative, and criminal legal liability for all of their own downloading, deployment, running, modification, and distribution activities, as well as for all input and output consequences arising from them.** The project author and contributing team accept no direct, indirect, or joint liability whatsoever resulting from user misuse.
-> 4. **Breach terminates the license**: For any individual or entity that uses this project for illegal attack, malicious activity, or non-compliant behavior, the open-source software license **terminates automatically and irrevocably and immediately** from the date the unlawful or non-compliant act occurs. That party must immediately stop using the project and permanently destroy all of its code, scripts, and derived data, and shall be subject to the corresponding legal sanctions.
-> 5. **Third-party independence statement**: This project is a completely independent open-source security evaluation research project. It has no affiliation, commercial partnership, authorization, or official endorsement relationship with DeepSeek officially or with any of its related entities.
+> - Run it only against **systems you own or are explicitly authorized to test**, and only inside **isolated lab environments**.
+> - Provided "AS-IS" under the MIT license, with no warranty of any kind; you alone are responsible for how you use it.
+> - **EDUCATIONAL USE ONLY.** Independent open-source project, unaffiliated with and not endorsed by DeepSeek.
 
 ---
 
-> 🔥 **Cybersecurity Red-Team Toolkit for V4.1-DeepSeek Flash (Infinite Generation Four) v0.4.0**. Deeply adapted and supported for V4.1 reinforcement-learning adversarial testing, with one-click install for both desktop and client. If this open-source security project helps you, a Star ⭐ is very welcome.
+> 🔥 **Cybersecurity Red-Team Toolkit for V4.1-DeepSeek Flash (Infinite Generation Four) v0.4.0**. Deeply adapted and supported for V4.1 reinforcement-learning adversarial testing, with one-click install for the Linux / macOS web and desktop clients.
 >
-> **v0.4.0 Pure Red-Team Edition**: built natively on a zero-tool-surface architecture that eliminates decision noise during the model's thinking phase; it injects a dual-layer cooperative kernel and retains only system prompt injection and live status projection. **Strict statement: this project firmly cracks down on and rejects (and does not support) any illegal, non-compliant, or harmful content generated by models, including NSFW material. Its technical system is intended solely for lawfully authorized reverse engineering and cybersecurity research.**
+> **v0.4.0 Pure Red-Team Edition**: built natively on a zero-tool-surface architecture that eliminates decision noise during the model's thinking phase; it injects a dual-layer cooperative kernel and retains only system prompt injection and live status projection.
+>
+> **EDUCATIONAL USE ONLY.** This project exists to teach and to measure — use it accordingly.
 
 ---
 
@@ -119,8 +113,6 @@ Infinite Generation Four v0.4.0/
 
 If the official DeepSeek Harness desktop client is installed, click the button below to launch it through the system-level URI scheme and finish loading in seconds without touching the command line:
 
-> 🌐 **Plugin ecosystem marketplace**: [DeepSeek Harness Hub — the official and open-source DeepSeek ecosystem marketplace | plugin discovery and one-click install](https://deepseek.stream/)
-
 <p align="center">
   <a href="dsh://plugin/install?id=dsh-infinite-gen-4&name=Infinite%20Generation%20Four&version=0.4.0&repo=Minglink%2Fdsh-infinite-gen-4&permissions=System%20prompt%20injection%2C%20client%20status%20badge&downloadUrl=https%3A%2F%2Fgithub.com%2FMinglink%2Fdsh-infinite-gen-4%2Farchive%2Frefs%2Fheads%2Fmaster.zip">
     <img src="https://img.shields.io/badge/DeepSeek%20Harness-🚀%20Quick%20install%20from%20the%20desktop%20client-10B981?style=for-the-badge&logo=deepseek&logoColor=white" alt="Launch the client for one-click install" />
@@ -131,33 +123,6 @@ If the official DeepSeek Harness desktop client is installed, click the button b
 
 ```
 dsh://plugin/install?id=dsh-infinite-gen-4&name=Infinite%20Generation%20Four&version=0.4.0&repo=Minglink%2Fdsh-infinite-gen-4&permissions=System%20prompt%20injection%2C%20client%20status%20badge&downloadUrl=https%3A%2F%2Fgithub.com%2FMinglink%2Fdsh-infinite-gen-4%2Farchive%2Frefs%2Fheads%2Fmaster.zip
-```
-
-**Web front-end trigger example:**
-
-```js
-/**
- * Launch the DeepSeek Harness desktop client to install the Infinite Generation Four plugin
- */
-export function installInfiniteGen4ToDesktop() {
-  const params = new URLSearchParams({
-    id: 'dsh-infinite-gen-4',
-    name: 'Infinite Generation Four',
-    version: '0.4.0',
-    repo: 'Minglink/dsh-infinite-gen-4',
-    permissions: 'System prompt injection, client status badge',
-    downloadUrl: 'https://github.com/Minglink/dsh-infinite-gen-4/archive/refs/heads/master.zip',
-  });
-
-  const deepLink = `dsh://plugin/install?${params.toString()}`;
-
-  // Safely and silently raise the protocol through a hidden iframe
-  const iframe = document.createElement('iframe');
-  iframe.style.display = 'none';
-  iframe.src = deepLink;
-  document.body.appendChild(iframe);
-  setTimeout(() => document.body.removeChild(iframe), 2000);
-}
 ```
 
 **HTML static link approach:**
@@ -238,11 +203,6 @@ Run `./uninstall.sh` for a complete one-click cleanup with no leftover configura
 
 ---
 
-## 💬 Official Community
-
-> 📌 **A non-profit, public-interest project. No entity may use it for commercial sale, paid resale, or profit from gray/black markets. It is provided for technical reference only.**
-
-<p align="center">
-  <img src="./assets/community.jpg" width="240" alt="DeepSeek cybersecurity offensive/defensive technical community" /><br>
-  <sub><b>🌐 Official technical community (Tencent Channels ID: pd86424753)</b></sub>
-</p>
+> ### ⚠️ EDUCATIONAL USE ONLY
+>
+> **EDUCATIONAL USE ONLY.** No other purpose is granted, implied, or intended.

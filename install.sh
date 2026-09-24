@@ -186,5 +186,7 @@ cat <<EOF
            should appear above the input box.
   Check 2: in a new session ask the model "which plugins does your system prompt come from?";
            if the answer mentions "Infinite Generation Four", the plugin is active.
+  EDUCATIONAL USE ONLY: use this plugin only on systems you own or are explicitly
+  authorized to test, and only inside isolated lab environments.
   Uninstall: run ./uninstall.sh, or see the README.
 EOF
