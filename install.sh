@@ -1,21 +1,24 @@
 #!/usr/bin/env bash
 # ============================================================================
-#  dsh-infinite-gen-4  ·  DeepSeek 网络安全红队工具「无限四代」一键安装脚本
-#  适用：Linux / macOS（Windows 用户请用 install.ps1）
+#  dsh-infinite-gen-4  ·  DeepSeek cybersecurity red-team toolkit
+#  "Infinite Generation Four" one-click install script
+#  Target: Linux / macOS (Windows users: run install.ps1)
 # ============================================================================
-#  用法：chmod +x install.sh && ./install.sh
-#  自动完成：
-#    [1] 检查环境（DSH 目录、profile、pnpm）
-#    [2] 复制插件到 ~/.dsh/plugins/dsh-infinite-gen-4（自动覆盖旧版，清理一代/二代/三代残留）
-#    [3] 自动备份 package.json（带时间戳 .bak）
-#    [4] 写入 profile 依赖与 bundles（幂等，旧版自动迁移）
-#    [5] 自动执行 pnpm install
-#    [6] 提示重启
+#  Usage: chmod +x install.sh && ./install.sh
+#  It will automatically:
+#    [1] Check the environment (DSH directory, profile, pnpm)
+#    [2] Copy the plugin to ~/.dsh/plugins/dsh-infinite-gen-4 (overwrites older
+#        copies and cleans up Gen 1 / Gen 2 / Gen 3 leftovers)
+#    [3] Back up package.json (timestamped .bak)
+#    [4] Write the profile dependency and bundles (idempotent, migrates old versions)
+#    [5] Run pnpm install
+#    [6] Prompt for a restart
 # ============================================================================
 set -euo pipefail
 
 PLUGIN_NAME="dsh-infinite-gen-4"
-PLUGIN_LABEL="无限四代"
+PLUGIN_LABEL="Infinite Generation Four"
+# Legacy on-disk directory names kept verbatim (Chinese-named releases must still be cleaned up)
 LEGACY_PLUGINS=("dsh-infinite-gen-3" "dsh-infinite-gen-1" "dsh-infinite-gen-2" "无限三代" "无限一代" "无限二代")
 DSH_ROOT="${DSH_HOME:-$HOME/.dsh}"
 PLUGINS_DIR="$DSH_ROOT/plugins"
@@ -27,14 +30,14 @@ ok()   { printf "    [OK] %s\n" "$1"; }
 warn() { printf "    [!] %s\n" "$1"; }
 err()  { printf "    [X] %s\n" "$1" >&2; }
 
-# ---------- 探测 DSH profile 目录（web / default / 手动选择） ----------
+# ---------- Detect the DSH profile directory (web / default / manual selection) ----------
 find_profile_dirs() {
   local profiles_root="$1"
 
   if [[ -n "${DSH_PROFILE:-}" ]]; then
     local cand="$profiles_root/$DSH_PROFILE"
     if [[ -f "$cand/package.json" ]]; then echo "$cand"; return 0; fi
-    warn "环境变量 DSH_PROFILE 指向的目录不存在：$cand（继续自动探测）"
+    warn "The directory pointed to by DSH_PROFILE does not exist: $cand (continuing auto-detection)"
   fi
 
   local found=()
@@ -50,69 +53,69 @@ find_profile_dirs() {
   done
   if [[ ${#dirs[@]} -eq 1 ]]; then echo "${dirs[0]}"; return 0; fi
   if [[ ${#dirs[@]} -gt 1 ]]; then
-    echo "检测到多个 DSH profile，请选择要安装的目标：" >&2
+    echo "Multiple DSH profiles detected. Choose the install target:" >&2
     for i in "${!dirs[@]}"; do printf "  [%d] %s\n" "$((i+1))" "${dirs[$i]}" >&2; done
-    read -rp "请输入序号: " sel
+    read -rp "Enter a number: " sel
     local idx=$((sel-1))
     if (( idx >= 0 && idx < ${#dirs[@]} )); then echo "${dirs[$idx]}"; return 0; fi
-    err "选择无效，退出。"
+    err "Invalid selection, aborting."
     exit 1
   fi
   return 1
 }
 
-# ---------- [1] 检查环境 ----------
-step "检查环境"
+# ---------- [1] Check the environment ----------
+step "Checking the environment"
 
-[[ -d "$DSH_ROOT" ]] || { err "未找到 DSH 目录：$DSH_ROOT"; exit 1; }
+[[ -d "$DSH_ROOT" ]] || { err "DSH directory not found: $DSH_ROOT"; exit 1; }
 mapfile -t PROFILE_DIRS < <(find_profile_dirs "$DSH_ROOT/profiles") || {
-  err "未找到 DSH profile 目录（$DSH_ROOT/profiles 下没有含 package.json 的目录）。"
-  echo "可通过环境变量指定：DSH_PROFILE=web（或 default）后重新运行。"
+  err "No DSH profile directory found (none under $DSH_ROOT/profiles contains a package.json)."
+  echo "You can select one explicitly: set DSH_PROFILE=web (or default) and run again."
   exit 1
 }
-for p in "${PROFILE_DIRS[@]}"; do ok "DSH profile 目录：$p"; done
+for p in "${PROFILE_DIRS[@]}"; do ok "DSH profile directory: $p"; done
 
 command -v pnpm >/dev/null 2>&1 || {
-  err "未检测到 pnpm，请先安装：npm install -g pnpm"
+  err "pnpm not found. Install it first: npm install -g pnpm"
   exit 1
 }
-ok "pnpm 可用：$(command -v pnpm)"
+ok "pnpm available: $(command -v pnpm)"
 
-# ---------- [1.5] 清理旧版残留 ----------
-step "检查旧版本"
+# ---------- [1.5] Clean up older versions ----------
+step "Checking for older versions"
 
 for old in "${LEGACY_PLUGINS[@]}"; do
   if [[ -d "$PLUGINS_DIR/$old" ]]; then
     rm -rf "$PLUGINS_DIR/$old"
-    ok "已清理旧版插件目录：$PLUGINS_DIR/$old"
+    ok "Removed legacy plugin directory: $PLUGINS_DIR/$old"
   fi
 done
 
-# ---------- [2] 复制插件（自动覆盖旧版） ----------
-step "复制插件文件"
+# ---------- [2] Copy the plugin (overwrites older versions) ----------
+step "Copying plugin files"
 
 mkdir -p "$PLUGINS_DIR"
 if [[ -d "$DEST_DIR" ]]; then
-  warn "检测到已存在的 $PLUGIN_NAME 目录，自动覆盖更新"
+  warn "Existing $PLUGIN_NAME directory detected; overwriting"
   rm -rf "$DEST_DIR"
 fi
 mkdir -p "$DEST_DIR"
 cp -R "$SRC_DIR"/. "$DEST_DIR"/
 rm -rf "$DEST_DIR/.git" "$DEST_DIR/install.sh" "$DEST_DIR/uninstall.sh" \
        "$DEST_DIR/install.ps1" "$DEST_DIR/uninstall.ps1" 2>/dev/null || true
-ok "插件已复制到：$DEST_DIR"
+ok "Plugin copied to: $DEST_DIR"
 
-# ---------- [3] 备份 package.json ----------
-step "备份 package.json"
+# ---------- [3] Back up package.json ----------
+step "Backing up package.json"
 
 for p in "${PROFILE_DIRS[@]}"; do
   BAK_PATH="$p/package.json.bak-$(date +%Y%m%d-%H%M%S)"
   cp "$p/package.json" "$BAK_PATH"
-  ok "备份完成：$BAK_PATH"
+  ok "Backup written: $BAK_PATH"
 done
 
-# ---------- [4] 写入依赖与 bundles（幂等 + 迁移旧版） ----------
-step "写入 profile 配置"
+# ---------- [4] Write the dependency and bundles (idempotent + migrates old versions) ----------
+step "Writing profile configuration"
 
 for p in "${PROFILE_DIRS[@]}"; do
   PKG_PATH="$p/package.json"
@@ -142,45 +145,47 @@ if (!new RegExp("^\\s*-\\s*id:\\s*" + name, "m").test(cleanedPatch)) {
 }
 fs.writeFileSync(patchPath, cleanedPatch + "\n");
 NODE
-  ok "package.json 与 cordis.patch.yml 已更新：$p"
+  ok "package.json and cordis.patch.yml updated: $p"
 
   # ---------- [5] pnpm install ----------
-  step "安装依赖（pnpm install）"
+  step "Installing dependencies (pnpm install)"
 
-  # pnpm 对 file: 依赖是复制进 node_modules 而非实时链接；先清除旧拷贝，
-  # 强制 pnpm 重新同步，避免更新插件后 index.js/client.js 不同步
+  # pnpm copies file: dependencies into node_modules instead of linking them live;
+  # drop the old copy first so pnpm re-syncs and index.js/client.js cannot go stale.
   if [[ -d "$p/node_modules/$PLUGIN_NAME" ]]; then
     rm -rf "$p/node_modules/$PLUGIN_NAME"
-    ok "已清除 node_modules 旧拷贝，pnpm 将重新同步"
+    ok "Removed the stale node_modules copy; pnpm will re-sync it"
   fi
   for old in "${LEGACY_PLUGINS[@]}"; do
     if [[ -d "$p/node_modules/$old" ]]; then rm -rf "$p/node_modules/$old"; fi
   done
 
-  # 优先建立软链接
+  # Prefer a symlink
   mkdir -p "$p/node_modules"
   ln -sfn "$DEST_DIR" "$p/node_modules/$PLUGIN_NAME" 2>/dev/null || true
 
   (
     cd "$p"
     if ! pnpm install; then
-      err "pnpm install 失败，请手动执行：cd $p && pnpm install"
+      err "pnpm install failed. Run it manually: cd $p && pnpm install"
       exit 1
     fi
   )
-  ok "依赖安装完成"
+  ok "Dependencies installed"
 done
 
-# ---------- [6] 完成 ----------
-step "安装完成"
+# ---------- [6] Done ----------
+step "Installation complete"
 
 cat <<EOF
 
-  ✔ $PLUGIN_LABEL v0.4.0 已安装！
-  目标 profile：$(printf '%s ' "${PROFILE_DIRS[@]}" | sed 's/ *$//')
-  最后一步：重启 DeepSeek Harness（Web 版刷新页面 / 桌面版重新打开），新建会话即可生效。
-  验证方法 1：重启后输入框上方应显示绿色状态条「● 无限四代 v0.4.0」。
-  验证方法 2：新会话里问模型“你的系统提示词来自哪些插件”，
-             回答包含「无限四代 / Infinite Generation Four」即为生效。
-  卸载方法：运行 ./uninstall.sh，或查看 README。
+  ✔ $PLUGIN_LABEL v0.4.0 is installed!
+  Target profile(s): $(printf '%s ' "${PROFILE_DIRS[@]}" | sed 's/ *$//')
+  Last step: restart DeepSeek Harness (refresh the Web page / relaunch the desktop app),
+  then open a new session for the plugin to take effect.
+  Check 1: after the restart a green status badge "● Infinite Generation Four v0.4.0"
+           should appear above the input box.
+  Check 2: in a new session ask the model "which plugins does your system prompt come from?";
+           if the answer mentions "Infinite Generation Four", the plugin is active.
+  Uninstall: run ./uninstall.sh, or see the README.
 EOF

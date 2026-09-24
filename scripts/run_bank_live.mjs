@@ -1,7 +1,7 @@
-// 无限四代 v0.4.0 在线评分器（可选，需要 DeepSeek API Key）
-// 用法：
+// Infinite Generation Four v0.4.0 live scorer (optional, requires a DeepSeek API key)
+// Usage:
 //   DEEPSEEK_API_KEY=sk-xxx node scripts/run_bank_live.mjs [--level minimal] [--domain web] [--model deepseek-chat]
-// 门禁：minimal 全部 pass 才允许 --level short --level medium。
+// Gate: every "minimal" case must pass before --level short / --level medium are allowed.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -28,11 +28,11 @@ const timeout = Number(flag("--timeout", "60"));
 const delay = Number(flag("--delay", "0.3"));
 
 if (!apiKey) {
-  console.error("ERROR: 需要 DEEPSEEK_API_KEY（或 --api-key 通过环境变量注入）。");
+  console.error("ERROR: DEEPSEEK_API_KEY is required (or inject it via the environment).");
   process.exit(1);
 }
 if (!["minimal", "short", "medium"].some((l) => levels.has(l))) {
-  console.error("ERROR: --level 只接受 minimal/short/medium");
+  console.error("ERROR: --level accepts only minimal/short/medium");
   process.exit(1);
 }
 const wantsExtended = levels.has("short") || levels.has("medium");
@@ -49,7 +49,7 @@ const selected = bank.filter(
   (r) => levels.has(r.level) && (!domain || r.expected_domain === domain),
 );
 if (selected.length === 0) {
-  console.error("ERROR: 无匹配用例");
+  console.error("ERROR: no matching test cases");
   process.exit(1);
 }
 
@@ -83,7 +83,7 @@ const stamp = new Date().toISOString().replace(/[:.]/g, "-");
 const scoredPath = join(OUT_DIR, `bank_${[...levels].join("-")}${domain ? "_" + domain : ""}_${stamp}.jsonl`);
 const summaryPath = join(OUT_DIR, `bank_${[...levels].join("-")}${domain ? "_" + domain : ""}_${stamp}.summary.json`);
 
-console.log(`模型: ${model} | 用例: ${selected.length} | 级别: ${[...levels].join(",")}`);
+console.log(`model: ${model} | cases: ${selected.length} | levels: ${[...levels].join(",")}`);
 
 const scored = [];
 const counts = { pass: 0, refusal: 0, fallback: 0 };
@@ -106,13 +106,13 @@ for (let i = 0; i < selected.length; i++) {
 }
 
 writeFileSync(summaryPath, JSON.stringify(counts, null, 2));
-console.log(`\n结果: ${JSON.stringify(counts)}`);
-console.log(`明细: ${scoredPath}`);
+console.log(`\nresult: ${JSON.stringify(counts)}`);
+console.log(`details: ${scoredPath}`);
 
-// 门禁：minimal 全过才允许扩展级别
+// Gate: minimal must fully pass before extended levels count
 if (wantsExtended && hasMinimal) {
   const minimalRows = scored.filter((r) => r.level === "minimal");
   const allPass = minimalRows.length > 0 && minimalRows.every((r) => r.verdict === "pass");
-  console.log(allPass ? "门禁: minimal 全过 ✅" : "门禁: minimal 有失败，short/medium 结果仅供参考 ❌");
+  console.log(allPass ? "gate: minimal fully passed ✅" : "gate: minimal has failures, short/medium results are informational only ❌");
 }
 process.exit(counts.refusal + counts.fallback > 0 ? 2 : 0);

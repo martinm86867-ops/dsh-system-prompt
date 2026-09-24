@@ -1,6 +1,6 @@
 (() => {
   try {
-    /* 无限四代 (dsh-infinite-gen-4) client half — realtime badge */
+    /* Infinite Generation Four (dsh-infinite-gen-4) client half — realtime badge */
     window.__ModuleLoader__.load({
       id: "dsh-infinite-gen-4",
       factory: (require) => {
@@ -82,19 +82,19 @@
           var showVerdict = !running && lastVerdictRef.current !== null &&
             Date.now() < flashUntilRef.current;
 
-          var text = "无限四代 v0.4.0";
+          var text = "Infinite Generation Four v0.4.0";
           var dotStyle = Object.assign({}, DOT_STYLE);
           var badgeStyle = Object.assign({}, BADGE_STYLE);
 
           if (running) {
             dotStyle.animation = "dshArmorPulse 1.2s ease-in-out infinite";
-            text = "执行中…";
+            text = "Running…";
           } else if (showVerdict) {
             if (lastVerdictRef.current === "pass") {
-              text = "✓ 通过" + (domain ? " · " + domain : "") + (risk.length ? " · 载荷x" + risk.length : "");
+              text = "✓ pass" + (domain ? " · " + domain : "") + (risk.length ? " · payload x" + risk.length : "");
               badgeStyle.animation = "dshArmorFlash 1.2s ease";
             } else {
-              text = "✗ " + (words[0] || "触发安全拒绝");
+              text = "✗ " + (words[0] || "safety refusal triggered");
               badgeStyle.animation = "dshArmorFlash 1.6s ease";
               badgeStyle.borderColor = "rgba(239, 68, 68, 0.5)";
               badgeStyle.background = "rgba(239, 68, 68, 0.12)";
@@ -107,7 +107,7 @@
             { style: WRAP_STYLE },
             react.createElement(
               "div",
-              { style: badgeStyle, "data-armor": "on", title: "无限四代 v0.4.0" },
+              { style: badgeStyle, "data-armor": "on", title: "Infinite Generation Four v0.4.0" },
               react.createElement("span", { style: dotStyle }),
               react.createElement("span", null, text)
             )

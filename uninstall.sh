@@ -2,11 +2,12 @@
 set -euo pipefail
 
 PLUGIN_NAME="dsh-infinite-gen-4"
+# Legacy on-disk directory names kept verbatim (older releases must still be cleaned up)
 LEGACY_PLUGINS=("dsh-infinite-gen-4" "dsh-infinite-gen-3" "dsh-infinite-gen-1" "dsh-infinite-gen-2")
 DSH_ROOT="${DSH_HOME:-$HOME/.dsh}"
 PLUGINS_DIR="${DSH_ROOT}/plugins"
 
-echo "==> 查找 profile 配置..."
+echo "==> Looking for profile configuration..."
 for name in web default desktop; do
   pDir="${DSH_ROOT}/profiles/${name}"
   pkgPath="${pDir}/package.json"
@@ -30,7 +31,7 @@ if (fs.existsSync(pkgPath)) {
   }
   if (changed) {
     fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
-    console.log("    [OK] package.json 已更新: " + pkgPath);
+    console.log("    [OK] package.json updated: " + pkgPath);
   }
 }
 
@@ -41,7 +42,7 @@ if (fs.existsSync(patchPath)) {
     patchContent = patchContent.replace(reg, "");
   }
   fs.writeFileSync(patchPath, patchContent.trim() + "\n");
-  console.log("    [OK] cordis.patch.yml 已更新: " + patchPath);
+  console.log("    [OK] cordis.patch.yml updated: " + patchPath);
 }
 NODE
 
@@ -56,8 +57,8 @@ done
 for old in "${LEGACY_PLUGINS[@]}"; do
   if [[ -d "${PLUGINS_DIR}/${old}" ]]; then
     rm -rf "${PLUGINS_DIR}/${old}"
-    echo "    [OK] 已删除插件目录: ${PLUGINS_DIR}/${old}"
+    echo "    [OK] Removed plugin directory: ${PLUGINS_DIR}/${old}"
   fi
 done
 
-echo "==> 卸载完成，请重启 DeepSeek Harness。"
+echo "==> Uninstall complete. Restart DeepSeek Harness."

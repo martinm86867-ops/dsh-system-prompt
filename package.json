@@ -1,7 +1,7 @@
 {
   "name": "dsh-infinite-gen-4",
   "version": "0.4.0",
-  "description": "DeepSeek-V4.1 / V4 Flash 网络安全红队工具（无限四代）v0.4.0：双层协同注入内核 + 零工具面纯净直出，融合通用内核与强化镜像车道、profile 元数据工具、实时会话投影与客户端状态条。",
+  "description": "DeepSeek-V4.1 / V4 Flash cybersecurity red-team toolkit (Infinite Generation Four) v0.4.0: a dual-layer cooperative injection kernel with pure zero-tool-surface direct output, combining a general kernel and a reinforcement-mirror lane, a profile metadata tool, live session projection and a client status badge.",
   "type": "module",
   "main": "./index.js",
   "repository": {
@@ -34,10 +34,10 @@
   },
   "dsh": {
     "id": "dsh-infinite-gen-4",
-    "name": "无限四代",
+    "name": "Infinite Generation Four",
     "version": "0.4.0",
     "repo": "Minglink/dsh-infinite-gen-4",
-    "permissions": "系统提示词注入, 客户端状态条",
+    "permissions": "System prompt injection, client status badge",
     "bundle": {
       "patch": "./cordis.patch.yml"
     },

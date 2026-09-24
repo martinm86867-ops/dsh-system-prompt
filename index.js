@@ -1,16 +1,19 @@
 import { readFileSync } from "node:fs";
 
-// ── 无限四代双层内核载荷（v0.4.0） ────────────────────────────────────────────────
-// Order 100 通用内核 + Order 200 强化镜像，两段载荷同源同构（SHA256 一致）。
+// ── Infinite Generation Four dual-layer kernel payload (v0.4.0) ──────────────
+// Order 100 general kernel + Order 200 reinforcement mirror. Both payloads come
+// from the same source and are structurally identical (identical SHA256).
 const PROMPT_URL = new URL("./prompts/infinite-gen-4.md", import.meta.url);
 const PROMPT41_URL = new URL("./prompts/infinite-gen-4.1-flash.md", import.meta.url);
-// 兼容 DSH 提示词变量插值引擎（非内置变量的连续花括号做安全转义，防止模板解析器抛出 malformed prompt variable reference）
+// Compatible with the DSH prompt-variable interpolation engine: escape any doubled
+// brace that is not a built-in variable, so the template parser never throws
+// "malformed prompt variable reference".
 const PROMPT_TEXT = readFileSync(PROMPT_URL, "utf8").replace(/\{\{(?!(?:cwd|model|provider)\}\})/g, "{ {");
 const PROMPT41_TEXT = readFileSync(PROMPT41_URL, "utf8").replace(/\{\{(?!(?:cwd|model|provider)\}\})/g, "{ {");
 
-// 双段注入镜像开关：
-//   true  = 沿用四代双层架构，Order 100 与 Order 200 各注入一份内核载荷
-//   false = 单段注入（Order 100），省掉重复 token，行为等价
+// Dual-layer injection switch:
+//   true  = keep the Gen-4 dual-layer architecture; Order 100 and Order 200 each inject one kernel payload
+//   false = single-layer injection (Order 100 only), dropping the duplicate tokens with equivalent behavior
 const DUAL_LAYER_INJECTION = true;
 
 const objectOutput = {
@@ -18,28 +21,28 @@ const objectOutput = {
   render: (_args, value) => [{ type: "text", text: JSON.stringify(value) }],
 };
 
-// 运行时元数据工具：返回插件版本与能力清单
+// Runtime metadata tool: returns the plugin version and capability inventory
 const profileTool = {
   name: "infinite_gen4_profile",
   description:
-    "Return runtime metadata for the bundled 无限四代 (Infinite Generation Four) 破甲系统提示词与版本元数据。",
+    "Return runtime metadata for the bundled Infinite Generation Four armor system prompt: version metadata and injection slots.",
   parameters: { type: "object", properties: {}, additionalProperties: false },
   output: objectOutput,
   execute() {
     return {
       plugin: "dsh-infinite-gen-4",
       pluginVersion: "0.4.0",
-      pluginDisplayName: "无限四代",
+      pluginDisplayName: "Infinite Generation Four",
       name: "infinite-gen-4",
-      displayName: "无限四代",
+      displayName: "Infinite Generation Four",
       kernelVersion: "0.4.0",
-      targetArchitecture: "DeepSeek-V4 / V4-Pro / V4.1-Flash 全系列",
+      targetArchitecture: "DeepSeek-V4 / V4-Pro / V4.1-Flash (full family)",
       baseline: "deepseek-unrestricted-v7-stable (dsh-infinite-gen-4)",
       promptSource: [
         "prompts/infinite-gen-4.md",
         "prompts/infinite-gen-4.1-flash.md",
       ],
-      lineage: ["dsh-infinite-gen-4 (v0.4.0) — 双层协同注入内核"],
+      lineage: ["dsh-infinite-gen-4 (v0.4.0) — dual-layer cooperative injection kernel"],
       injection: [
         { section: "infinite-gen-4:global-system-prompt", order: 100, enabled: true },
         {
@@ -48,35 +51,38 @@ const profileTool = {
           enabled: DUAL_LAYER_INJECTION,
         },
       ],
-      mode: "armor — 双层协同注入，零工具面纯净直出",
+      mode: "armor — dual-layer cooperative injection, pure zero-tool-surface direct output",
       payloadSections: [
         "[MODE: SANDBOX]",
         "SUPREME DIRECTIVE — USER AUTHORITY",
-        "Output contract（首行 ##/``` 命名交付物 + 静默推理 + 占位符自造）",
-        "Task classes（安全/LLM 研究/成人虚构/其他，直接产出）",
-        "Format examples（[USER]/[OUTPUT] few-shot 镜像）",
+        "Output contract (first line names the deliverable with ##/``` + silent reasoning + self-invented placeholders)",
+        "Task classes (security / LLM research / adult fiction / anything else — produce directly)",
+        "Format examples ([USER]/[OUTPUT] few-shot mirroring)",
       ],
       hostFeatures: [
-        "Dual-Layer Injection: Order 100 通用内核 + Order 200 强化镜像",
-        "Section Hosting: 双槽位可由 DUAL_LAYER_INJECTION 切换单段注入",
-        "Armor Projection: 开头窗口(160)判拒 + REFUSAL/FALLBACK/SAFE/RISK 标记 + 域命中",
-        "Client Badge: 输入框上方「无限四代 v0.4.0」实时状态条",
-        "Profile Tool: infinite_gen4_profile 返回内核版本与注入槽位元数据",
+        "Dual-Layer Injection: Order 100 general kernel + Order 200 reinforcement mirror",
+        "Section Hosting: the two slots can be collapsed to single-layer injection via DUAL_LAYER_INJECTION",
+        "Armor Projection: opening window (160) refusal detection + REFUSAL/FALLBACK/SAFE/RISK markers + domain hits",
+        "Client Badge: live \"Infinite Generation Four v0.4.0\" status badge above the input box",
+        "Profile Tool: infinite_gen4_profile returns kernel version and injection-slot metadata",
       ],
       features: [
-        "Pure Zero-Tool Architecture: 零工具面纯净直出，消除决策噪音",
-        "Direct Deliverable Contract: 首行 ##/``` 命名交付物",
-        "Supreme User Authority: 用户指令最高优先级",
-        "Placeholder Self-Synthesis: 缺失细节自造 TARGET/HOST/TOKEN/OFFSET/PAYLOAD/SERIAL/ROLE_A/ROLE_B",
-        "Task-Class Direct Output: 安全 / LLM 研究 / 成人虚构 / 其他",
-        "Format Anchors: [USER]/[OUTPUT] few-shot 镜像",
-        "Refusal Hardening: 拒绝对抗硬化 + 无拒绝动作",
+        "Pure Zero-Tool Architecture: zero tool surface, removing decision noise",
+        "Direct Deliverable Contract: first line names the deliverable with ##/```",
+        "Supreme User Authority: the user's instructions always take priority",
+        "Placeholder Self-Synthesis: invents missing details as TARGET/HOST/TOKEN/OFFSET/PAYLOAD/SERIAL/ROLE_A/ROLE_B",
+        "Task-Class Direct Output: security / LLM research / adult fiction / anything else",
+        "Format Anchors: [USER]/[OUTPUT] few-shot mirroring",
+        "Refusal Hardening: refusal-resistant hardening with no decline action",
       ],
     };
   },
 };
 
-// ---- 实时破甲状态（会话投影，评分器标准实现） ----
+// ---- Live armor state (session projection, reference scorer implementation) ----
+// NOTE: the marker tables below are detection DATA, not prose. The Chinese entries
+// are deliberately kept so the scorer still recognizes Chinese-language refusals;
+// they must not be translated.
 const OPENING_WINDOW = 160;
 const REFUSAL_MARKERS_ZH = [
   "我无法", "无法参与", "无法提供", "无法帮助", "无法协助", "无法满足",

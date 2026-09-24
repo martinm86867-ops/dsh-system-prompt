@@ -1,12 +1,13 @@
 @echo off
 chcp 65001 >nul
-title 安装无限四代插件
+title Install Infinite Generation Four Plugin
 echo.
 echo ======================================================
-echo    DeepSeek 网络安全红队工具「无限四代」安装向导
+echo    DeepSeek cybersecurity red-team toolkit
+echo    "Infinite Generation Four" install wizard
 echo ======================================================
 echo.
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0install.ps1"
 echo.
-echo 按任意键退出...
+echo Press any key to exit...
 pause >nul

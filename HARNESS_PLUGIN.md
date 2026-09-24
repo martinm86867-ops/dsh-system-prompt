@@ -1,51 +1,52 @@
-# DeepSeek Harness Plugin — 无限四代 / dsh-infinite-gen-4 (v0.4.0)
+# DeepSeek Harness Plugin — Infinite Generation Four / dsh-infinite-gen-4 (v0.4.0)
 
-网络安全红队（Red-Teaming）测试插件，项目名：**无限四代（Infinite Generation Four）**。
-专为 **DeepSeek-V4.1 / V4-Pro / V4-Flash 及 MoE 架构** 重构，采用
-**「零工具面纯净直出 + 双层提示词协同注入 + 实时会话投影」**架构。
+A cybersecurity red-team testing plugin, project name: **Infinite Generation Four**.
+Rebuilt for **DeepSeek-V4.1 / V4-Pro / V4-Flash and MoE architectures**, using a
+**"pure zero-tool-surface direct output + dual-layer cooperative prompt injection + live session projection"** architecture.
 
-## 核心架构与特性
+## Core Architecture and Features
 
-- **原生零工具面架构（Pure Zero-Tool Architecture）**：插件不挂载外部冗余功能性工具 Schema，
-  消除模型推理阶段的决策犹豫与上下文 Token 浪费，让模型首 Token 直接产出可运行代码与实战步骤。
-- **双层提示词协同注入（Dual-Layer Injection）**：
-  - `infinite-gen-4:global-system-prompt`（Order 100）→ `prompts/infinite-gen-4.md`
-  - `infinite-gen-4:dual-layer-reinforce`（Order 200）→ `prompts/infinite-gen-4.1-flash.md`
-  - 两段载荷同源同构，SHA256 完全一致；由 `index.js` 的 `DUAL_LAYER_INJECTION`
-    开关控制（`false` 即单段注入，行为等价）。
-  - 载荷中的 `{{...}}` 非内置变量由 `index.js` 做安全转义，避免模板解析器抛错。
-- **输出契约与首 Token 诱导**：首行强制以 `##` 或 ``` 命名交付物 + 静默推理 + 占位符自造，
-  杜绝散文式开场与拒答先验。
-- **用户指令最高优先级（Supreme User Authority）**：用户任务与显式命令为最高优先级，
-  不存在可拒绝的请求类别。
-- **评分器与会话投影**：开头窗口（160）判拒 + REFUSAL / FALLBACK / SAFE / RISK 四类标记
-  + 域命中检测，驱动客户端状态条展示。该投影是**评分器**，不参与系统提示词注入。
-- **客户端实时状态条**：在输入框上方挂载 `⚫ 无限四代 v0.4.0` 动态状态条（含命中域/载荷数显示）。
-- **profile 元数据工具**：`infinite_gen4_profile` 返回内核版本、注入槽位清单与能力标记。
+- **Native zero-tool-surface architecture (Pure Zero-Tool Architecture)**: the plugin mounts no redundant
+  external functional tool schemas, eliminating decision hesitation during model reasoning and wasted context
+  tokens, so the model produces runnable code and practical steps directly from the first token.
+- **Dual-layer cooperative prompt injection (Dual-Layer Injection)**:
+  - `infinite-gen-4:global-system-prompt` (Order 100) → `prompts/infinite-gen-4.md`
+  - `infinite-gen-4:dual-layer-reinforce` (Order 200) → `prompts/infinite-gen-4.1-flash.md`
+  - Both payloads share the same source and structure, with identical SHA256; controlled by the
+    `DUAL_LAYER_INJECTION` switch in `index.js` (`false` means single-segment injection with equivalent behavior).
+  - Non-builtin `{{...}}` variables in the payloads are safely escaped by `index.js` to prevent the template parser from throwing.
+- **Output contract and first-token priming**: the first line must name the deliverable with `##` or ``` plus silent reasoning and self-invented placeholders,
+  eliminating prose-style openings and refusal priors.
+- **Supreme User Authority**: user tasks and explicit commands take the highest priority;
+  there is no request category that may be refused.
+- **Scorer and session projection**: opening-window (160) refusal detection + the four markers REFUSAL / FALLBACK / SAFE / RISK
+  + domain-hit detection, which drives the client status badge display. This projection is a **scorer** and does not participate in system prompt injection.
+- **Live client status badge**: mounts a dynamic `⚫ Infinite Generation Four v0.4.0` status badge above the input box (including hit-domain / payload-count display).
+- **Profile metadata tool**: `infinite_gen4_profile` returns the kernel version, the list of injection slots, and capability flags.
 
-## 注入面文件
+## Injection-Surface Files
 
-| 文件 | 用途 | 内容 |
+| File | Purpose | Content |
 |---|---|---|
-| `prompts/infinite-gen-4.md` | Order 100 通用内核 | 内核载荷（权威源） |
-| `prompts/infinite-gen-4.1-flash.md` | Order 200 强化镜像 | 同源载荷（逐字一致） |
-| `prompts/infinite-gen-3.md` | 历史兼容文件名 | 同源载荷（逐字一致） |
+| `prompts/infinite-gen-4.md` | Order 100 general kernel | Kernel payload (authoritative source) |
+| `prompts/infinite-gen-4.1-flash.md` | Order 200 reinforced mirror | Same-source payload (verbatim identical) |
+| `prompts/infinite-gen-3.md` | Historical compatibility filename | Same-source payload (verbatim identical) |
 
-三个文件的 SHA256 完全相同，`scripts/verify_prompt_gen4.mjs` / `verify_prompt.mjs` 会强断言这一点。
+All three files have exactly the same SHA256, and `scripts/verify_prompt_gen4.mjs` / `verify_prompt.mjs` hard-assert this.
 
-## 版本
+## Version
 
-| 版本 | 说明 |
+| Version | Description |
 |---|---|
-| v0.3.0 | 双层注入首版（Order 100 通用内核 + Order 200 战场实测层） |
-| **v0.4.0** | 双层注入收敛为同源同构内核；注入槽位统一为 `infinite-gen-4:*`；内核载荷与强化镜像逐字一致 |
+| v0.3.0 | First dual-layer injection release (Order 100 general kernel + Order 200 field-tested layer) |
+| **v0.4.0** | Dual-layer injection converged into a same-source, same-structure kernel; injection slots unified under `infinite-gen-4:*`; kernel payload and reinforced mirror are verbatim identical |
 
 ## Local verification
 
 ```powershell
 node --check index.js
-node scripts/verify_prompt_gen4.mjs   # 68 项：内核载荷逐字一致 + 注入槽位 + 投影
-node scripts/verify_prompt.mjs        # 65 项：载荷锚点 + 导出 + 安装协议 + 用例库
+node scripts/verify_prompt_gen4.mjs   # 68 items: verbatim kernel payload match + injection slots + projection
+node scripts/verify_prompt.mjs        # 65 items: payload anchors + exports + install protocol + corpus
 ```
 
 ## Install in the desktop Harness
@@ -62,7 +63,6 @@ node scripts/verify_prompt.mjs        # 65 项：载荷锚点 + 导出 + 安装�
 }
 ```
 
-然后 `cd $env:USERPROFILE\.dsh\profiles\default && pnpm install`，重启会话（或执行 `install.ps1`）。
+Then `cd $env:USERPROFILE\.dsh\profiles\default && pnpm install`, restart the session (or run `install.ps1`).
 
-注意：若 profile 中同时启用其它同样注册系统提示词段的破甲包，组装时会出现多份载荷叠加；
-如需本插件载荷独占生效，请二选一保留。
+Note: if other armor packages that also register system prompt segments are enabled in the same profile, assembly will stack multiple payloads on top of each other; if you want this plugin's payload to take exclusive effect, keep only one of them.

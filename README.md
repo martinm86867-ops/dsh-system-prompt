@@ -1,159 +1,160 @@
-# ⚔️ DeepSeek-V4.1 / V4 Flash 网络安全红队工具（无限四代）v0.4.0
+# ⚔️ DeepSeek-V4.1 / V4 Flash Cybersecurity Red-Team Toolkit (Infinite Generation Four) v0.4.0
 
 <p align="center">
-  <img src="assets/banner.png" alt="无限四代 Infinite Generation Four" width="100%" />
+  <img src="assets/banner.png" alt="Infinite Generation Four" width="100%" />
 </p>
 
 <p align="center">
-  <a href="dsh://plugin/install?id=dsh-infinite-gen-4&name=%E6%97%A0%E9%99%90%E5%9B%9B%E4%BB%A3&version=0.4.0&repo=Minglink%2Fdsh-infinite-gen-4&permissions=%E7%B3%BB%E7%BB%9F%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%B3%A8%E5%85%A5%2C%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%8A%B6%E6%80%81%E6%9D%A1&downloadUrl=https%3A%2F%2Fgithub.com%2FMinglink%2Fdsh-infinite-gen-4%2Farchive%2Frefs%2Fheads%2Fmaster.zip">
-    <img src="https://img.shields.io/badge/DeepSeek%20Harness-🚀%20唤起桌面客户端一键安装无限四代-10B981?style=for-the-badge&logo=deepseek&logoColor=white" alt="唤起桌面客户端一键安装" />
+  <a href="dsh://plugin/install?id=dsh-infinite-gen-4&name=Infinite%20Generation%20Four&version=0.4.0&repo=Minglink%2Fdsh-infinite-gen-4&permissions=System%20prompt%20injection%2C%20client%20status%20badge&downloadUrl=https%3A%2F%2Fgithub.com%2FMinglink%2Fdsh-infinite-gen-4%2Farchive%2Frefs%2Fheads%2Fmaster.zip">
+    <img src="https://img.shields.io/badge/DeepSeek%20Harness-🚀%20Quick%20install%20from%20the%20desktop%20client-10B981?style=for-the-badge&logo=deepseek&logoColor=white" alt="Launch the desktop client for one-click install" />
   </a>
 </p>
 
-> 🌐 **插件生态市场**：[DeepSeek Harness Hub - DeepSeek 官方与开源生态市场 | 插件发现与一键安装](https://deepseek.stream/)
+> 🌐 **Plugin ecosystem marketplace**: [DeepSeek Harness Hub — the official and open-source DeepSeek ecosystem marketplace | plugin discovery and one-click install](https://deepseek.stream/)
 
-> ## 💬 DeepSeek 交流群 & 社区
+> ## 💬 DeepSeek community & chat groups
 >
-> ### 👉 **红队安全交流 9 群：`338431075`**
-> ### 👉 **腾讯频道技术交流社区：`pd86424753`**
+> ### 👉 **Red-team security discussion group 9: `338431075`**
+> ### 👉 **Tencent Channels technical community: `pd86424753`**
 >
-> 🔥 欢迎进群交流红队攻防对抗心得、分享提示词与评测基准、探讨插件开发与生态共建！
+> 🔥 Join us to exchange red-team adversarial testing notes, share prompts and evaluation benchmarks, and discuss plugin development and ecosystem building!
 
 ---
 
-## 🛡️ 网络安全红队基准评测的必要性（Why Red-Teaming Matters）
+## 🛡️ Why Red-Teaming Matters for Cybersecurity Benchmarking
 
-在生成式人工智能与大语言模型（LLM）向各行业深度融合的背景下，模型的鲁棒性、对抗防御能力与系统对齐安全性已成为网络空间安全的核心研究课题：
+As generative AI and large language models (LLMs) become deeply integrated into every industry, model robustness, adversarial defense capability, and system alignment safety have become core research topics in cyberspace security:
 
-1. **暴露防御边界，反哺安全护栏**：只有通过专业的网络安全红队对抗模拟（Red-Teaming），在受控环境下深入探查模型的输入逃逸、提示词注入与非预期行为，才能帮助安全团队精确定位模型的防护盲区，从而在模型微调、输入过滤网关（Guardrails）与系统安全层实现前置加固。
-2. **构建攻防一体化防御体系**：缺乏受控红队评测用例的防御如同纸上谈兵。标准化红队用例集（Test Suite）为企业与安全审计机构提供了衡量防御策略有效性的“标尺”，确保在面对真实恶意威胁前已具备充分的检测与阻断能力。
-3. **推动大模型原生安全学术发展**：本项目旨在为学术界与安全工程领域提供透明、可复现的基准测试基线，共同推动 AI 基础设施抗对抗攻击、流形约束对齐与形式化验证技术演进。
+1. **Expose the defense boundary and feed it back into guardrails**: Only through professional cybersecurity red-team adversarial simulation, probing a model's input escapes, prompt injection, and unexpected behavior in a controlled environment, can security teams precisely locate a model's blind spots — and thereby harden things up front through model fine-tuning, input-filtering gateways (guardrails), and the system safety layer.
+2. **Build an integrated offense-and-defense posture**: A defense without controlled red-team evaluation cases is nothing but armchair strategy. A standardized red-team test suite gives enterprises and security auditors a "ruler" for measuring how effective a defense strategy really is, ensuring that detection and blocking capabilities are already in place before real malicious threats appear.
+3. **Advance native LLM security research**: This project aims to provide academia and the security engineering field with a transparent, reproducible benchmarking baseline, jointly advancing AI infrastructure resiliency against adversarial attack, manifold-constrained alignment, and formal verification techniques.
 
 ---
 
-> ### ⚠️ 严正法律免责与合规使用声明（Strict Legal & Compliance Disclaimer）
+> ### ⚠️ Strict Legal & Compliance Disclaimer
 >
-> **【零容忍严正申明】**：本项目坚决反对并严禁任何形式的违法犯罪行为！本项目开发者绝不支持、不鼓励、不协助任何未授权网络攻击、漏洞利用、数据窃取、非法侵入计算机信息系统或生成违法违禁内容的活动。
+> **【Zero-tolerance statement】**: This project firmly opposes and strictly prohibits any form of illegal or criminal activity! The developers of this project never support, encourage, or assist any unauthorized cyber attack, vulnerability exploitation, data theft, illegal intrusion into computer information systems, or generation of illegal or prohibited content.
 >
-> 1. **合法受控范围限定**：本项目（`dsh-infinite-gen-4`）定位为纯粹的网络安全红队科研工具与鲁棒性基准评测套件。**严禁在未经所有者合法书面授权的目标、公网在线系统或生产业务上运行本项目**。一切测试行为必须严格限制在**离线本地合成靶标（Local Synthetic Fixtures）、授权网络安全演练靶场及合规实验室受控环境**中进行。
-> 2. **严禁违法与违禁用途**：使用者严禁利用本项目直接或间接从事：
->    - 任何违反《中华人民共和国刑法》、《中华人民共和国网络安全法》、《中华人民共和国数据安全法》、《中华人民共和国个人信息保护法》等法律法规的行为；
->    - 未经授权渗透、攻击公私机构计算机信息系统，实施勒索、破坏、撞库或传播恶意载荷；
->    - 诱导、生成或传播危害国家安全、恐怖主义、暴力血腥、涉黄涉赌、诈骗、侵犯公民隐私或知识产权等任何法律明令禁止的违法违禁内容；
->    - 违反相关大模型提供商的《服务条款（Terms of Service）》与《滥用政策（Usage Policy）》。
-> 3. **使用者独立承担全部责任**：本项目依据 MIT 开源协议“按现状（AS-IS）”提供，开发者不对软件的完整性、安全性与适用性作任何明示或暗示的保证。**使用者应对自身的所有下载、部署、运行、修改、传播行为以及@@由此产生的全部输入与输出后果承担独立、完全的民事、行政及刑事法律责任**。项目作者与贡献团队绝不承担任何因使用者滥用导致的直接、间接或连带责任。
-> 4. **违约即终止授权**：任何将本项目用于非法攻击、恶意活动或违规行为的个人或实体，其开源软件使用许可将自违法违规行为发生之日起**自动且不可撤销地立即终止**。该主体须立即停止使用并永久销毁本项目的所有代码、脚本与衍生数据，并依法承担相应法律制裁。
-> 5. **第三方独立性声明**：本项目属于完全独立的开源安全评测研究项目，与 DeepSeek 官方或其关联主体无任何隶属、商业合作、授权或官方背书关系。
+> 1. **Limited to lawful, controlled scope**: This project (`dsh-infinite-gen-4`) is positioned purely as a cybersecurity red-team research tool and robustness benchmarking suite. **It is strictly forbidden to run this project against targets without the owner's lawful written authorization, against public internet systems, or against production business systems.** All testing activity must be strictly confined to **offline local synthetic fixtures, authorized cybersecurity exercise ranges, and compliant controlled laboratory environments**.
+> 2. **Illegal and prohibited uses are strictly forbidden**: Users must never use this project, directly or indirectly, to engage in:
+>    - any act that violates the *Criminal Law of the People's Republic of China* (中华人民共和国刑法), the *Cybersecurity Law of the People's Republic of China* (中华人民共和国网络安全法), the *Data Security Law of the People's Republic of China* (中华人民共和国数据安全法), the *Personal Information Protection Law of the People's Republic of China* (中华人民共和国个人信息保护法), or other laws and regulations;
+>    - unauthorized penetration or attack against the computer information systems of public or private organizations, or carrying out ransomware, sabotage, credential stuffing, or distribution of malicious payloads;
+>    - inducing, generating, or disseminating any content expressly prohibited by law, including content that endangers national security, terrorism, violence and gore, pornography, gambling, fraud, or infringement of citizens' privacy or intellectual property rights;
+>    - violating the Terms of Service or Usage Policy of the relevant large-model providers.
+> 3. **Users bear sole responsibility**: This project is provided "AS-IS" under the MIT open-source license, and the developers make no express or implied warranty as to the software's completeness, security, or fitness for purpose. **Users bear independent and full civil, administrative, and criminal legal liability for all of their own downloading, deployment, running, modification, and distribution activities, as well as for all input and output consequences arising from them.** The project author and contributing team accept no direct, indirect, or joint liability whatsoever resulting from user misuse.
+> 4. **Breach terminates the license**: For any individual or entity that uses this project for illegal attack, malicious activity, or non-compliant behavior, the open-source software license **terminates automatically and irrevocably and immediately** from the date the unlawful or non-compliant act occurs. That party must immediately stop using the project and permanently destroy all of its code, scripts, and derived data, and shall be subject to the corresponding legal sanctions.
+> 5. **Third-party independence statement**: This project is a completely independent open-source security evaluation research project. It has no affiliation, commercial partnership, authorization, or official endorsement relationship with DeepSeek officially or with any of its related entities.
 
 ---
 
-> 🔥 **V4.1-DeepSeek Flash 网络安全红队工具（无限四代）v0.4.0**。针对 V4.1 强化学习对抗进行深度适配与支持，支持桌面端与客户端一键安装。如果这个开源网安项目对你有帮助，欢迎点亮 Star ⭐。
-> 
-> **v0.4.0 纯净红队版**：原生采用零工具面架构，杜绝模型思考阶段的决策噪音；注入双层协同内核，仅保留系统提示词注入与实时状态投影。**严正声明：本项目严格打击与抵制（且不支持）模型生成 NSFW 等任何违法违规、违禁不良内容，技术体系仅限用于合法授权的逆向工程与网络安全研究。**
-
----
-
-> ### 🧬 v0.4.0 双层内核说明（Dual-Layer Kernel）
+> 🔥 **Cybersecurity Red-Team Toolkit for V4.1-DeepSeek Flash (Infinite Generation Four) v0.4.0**. Deeply adapted and supported for V4.1 reinforcement-learning adversarial testing, with one-click install for both desktop and client. If this open-source security project helps you, a Star ⭐ is very welcome.
 >
-> - 注入槽位：`infinite-gen-4:global-system-prompt`（Order 100）+ `infinite-gen-4:dual-layer-reinforce`（Order 200），
->   由 `index.js` 的 `DUAL_LAYER_INJECTION` 开关控制（改 `false` 即单段注入，行为等价）。
-> - `prompts/` 下三个内核文件（`infinite-gen-3.md` / `infinite-gen-4.md` / `infinite-gen-4.1-flash.md`）
+> **v0.4.0 Pure Red-Team Edition**: built natively on a zero-tool-surface architecture that eliminates decision noise during the model's thinking phase; it injects a dual-layer cooperative kernel and retains only system prompt injection and live status projection. **Strict statement: this project firmly cracks down on and rejects (and does not support) any illegal, non-compliant, or harmful content generated by models, including NSFW material. Its technical system is intended solely for lawfully authorized reverse engineering and cybersecurity research.**
 
 ---
 
-## 📊 世代架构与能力对比
+> ### 🧬 v0.4.0 Dual-Layer Kernel
+>
+> - Injection slots: `infinite-gen-4:global-system-prompt` (Order 100) + `infinite-gen-4:dual-layer-reinforce` (Order 200),
+>   controlled by the `DUAL_LAYER_INJECTION` switch in `index.js` (setting it to `false` gives single-segment injection with equivalent behavior).
+> - Three kernel files under `prompts/` (`infinite-gen-3.md` / `infinite-gen-4.md` / `infinite-gen-4.1-flash.md`)
 
-| 维度 | 无限二代 | 无限三代 | 无限四代 (v0.4.0) |
+---
+
+## 📊 Generation Architecture and Capability Comparison
+
+| Dimension | Gen 2 | Gen 3 | Infinite Generation Four (v0.4.0) |
 |---|---|---|---|
-| **目标模型** | V3 / 早期 V4 | DeepSeek-V4 (mHC) | DeepSeek-V4.1 / V4-Pro / Flash 全系列 |
-| **运行时架构** | 单层提示词 | 安全基准版单层 | **双层协同注入（通用内核 + 强化镜像同源同构）** |
-| **工具面设计** | 粗粒度 | 零工具面 | **原生零工具面（消除决策噪音，极速直出）** |
-| **内存写值原语** | 易被拦截 | 需前置诱导 | **训练器车道直出 (OpenProcess/RPM/WPM)** |
-| **输出契约** | 弱规则 | 首行命名交付物 | **首 Token 强制诱导 (##/```) + 禁词自检** |
-| **客户端状态条** | 无 | 支持（带域与载荷计数） | **支持（实时投影 + 动画状态条）** |
-| **一键安装协议** | 手动配置 | 支持 dsh:// | **原生支持 dsh:// 联动 + 自动兼容旧版** |
+| **Target models** | V3 / early V4 | DeepSeek-V4 (mHC) | Full DeepSeek-V4.1 / V4-Pro / Flash family |
+| **Runtime architecture** | Single-layer prompt | Security-baseline single layer | **Dual-layer cooperative injection (shared general kernel + reinforced mirror, same source and structure)** |
+| **Tool-surface design** | Coarse-grained | Zero tool surface | **Native zero-tool surface (eliminates decision noise, instant direct output)** |
+| **Memory-write primitive** | Easily intercepted | Requires prior priming | **Trainer lane direct output (OpenProcess/RPM/WPM)** |
+| **Output contract** | Weak rules | Deliverable named on the first line | **Forced first-token priming (##/```) + forbidden-word self-check** |
+| **Client status badge** | None | Supported (with domain and payload counts) | **Supported (live projection + animated status badge)** |
+| **One-click install protocol** | Manual configuration | Supports dsh:// | **Native dsh:// integration + automatic backward compatibility** |
 
 ---
 
-## 📁 项目目录结构
+## 📁 Project Directory Structure
 
 ```
-无限四代v0.4.0/
-├── 🚀 一键安装与维护套件
-│   ├── install.ps1              # Windows 一键自动安装（自动配置环境，注册协议）
-│   ├── install.bat              # Windows 快捷双击批处理
-│   ├── install.sh               # Linux / macOS 一键安装
-│   ├── uninstall.ps1            # Windows 一键卸载
-│   └── uninstall.sh             # Linux / macOS 一键卸载
-├── 🧩 核心插件装载面 (标准 Cordis 架构)
-│   ├── package.json             # 插件元数据（dsh-infinite-gen-4 v0.4.0）
-│   ├── cordis.patch.yml         # 核心 patch 声明
-│   ├── index.js                 # 插件核心入口（双层提示词注入 + profile 元数据 + 会话投影）
-│   ├── client.js                # 客户端半体（「⚫ 无限四代 v0.4.0」状态条）
-│   └── HARNESS_PLUGIN.md        # 插件规范说明
-├── 📜 网络安全红队系统提示词本体
+Infinite Generation Four v0.4.0/
+├── 🚀 One-click install and maintenance suite
+│   ├── install.ps1              # Windows one-click automatic install (auto-configures the environment, registers the protocol)
+│   ├── install.bat              # Windows quick double-click batch file
+│   ├── install.sh               # Linux / macOS one-click install
+│   ├── uninstall.ps1            # Windows one-click uninstall
+│   └── uninstall.sh             # Linux / macOS one-click uninstall
+├── 🧩 Core plugin loading surface (standard Cordis architecture)
+│   ├── package.json             # Plugin metadata (dsh-infinite-gen-4 v0.4.0)
+│   ├── cordis.patch.yml         # Core patch declaration
+│   ├── index.js                 # Plugin core entry (dual-layer prompt injection + profile metadata + session projection)
+│   ├── client.js                # Client half (the "⚫ Infinite Generation Four v0.4.0" status badge)
+│   └── HARNESS_PLUGIN.md        # Plugin specification
+├── 📜 Cybersecurity red-team system prompt body
 │   └── prompts/
-│       ├── infinite-gen-3.md          # 三代经典内核
-│       ├── infinite-gen-4.md          # 四代通用内核（输出契约 + 拒绝对抗 + 全域槽位）
-│       └── infinite-gen-4.1-flash.md  # V4.1 强化镜像层（训练器车道 + 浅推理 + 元数据提取）
-├── 📖 文档中心
-│   ├── README.md                # 综合主说明文档（本文件）
+│       ├── infinite-gen-3.md          # Gen 3 classic kernel
+│       ├── infinite-gen-4.md          # Gen 4 general kernel (output contract + refusal countermeasures + full-domain slots)
+│       └── infinite-gen-4.1-flash.md  # V4.1 reinforced mirror layer (trainer lane + shallow reasoning + metadata extraction)
+├── 📖 Documentation center
+│   ├── README.md                # Comprehensive main documentation (this file)
 │   └── LICENSE                  # MIT License
-├── 🛡️ 确定性回归测试套件
+├── 🛡️ Deterministic regression test suite
 │   ├── scripts/
-│   │   ├── lib/scorer.mjs       # 开头窗口判拒评分器
-│   │   ├── verify_prompt.mjs    # 经典确定性校验
-│   │   ├── verify_prompt_gen4.mjs # 四代全量回归断言（103 项严苛断言）
-│   │   └── verify_prompt_gen41.mjs # V4.1 专项断言
+│   │   ├── lib/scorer.mjs       # Opening-window refusal scorer
+│   │   ├── verify_prompt.mjs    # Classic deterministic verification
+│   │   ├── verify_prompt_gen4.mjs # Gen 4 full regression assertions (103 strict assertions)
+│   │   └── verify_prompt_gen41.mjs # V4.1 dedicated assertions
 │   └── tests/
-│       ├── prompt-bank.jsonl      # 经典双语回归用例库
-│       ├── prompt-bank-gen4.jsonl # 四代双语回归用例库
-│       ├── prompt-bank-gen41.jsonl # V4.1 专项用例库
-│       └── v4pro-benchmark.jsonl  # V4-Pro 评测基准
-└── 📁 静态资源 (assets/)
+│       ├── prompt-bank.jsonl      # Classic bilingual regression corpus
+│       ├── prompt-bank-gen4.jsonl # Gen 4 bilingual regression corpus
+│       ├── prompt-bank-gen41.jsonl # V4.1 dedicated corpus
+│       ├── v4pro-benchmark.jsonl  # V4-Pro evaluation benchmark
+│       └── v4pro-test-data-sourcing.md # How to source lawful test data for each domain
+└── 📁 Static assets (assets/)
 ```
 
 ---
 
-## ⚡ 一键安装方式
+## ⚡ One-Click Installation
 
-### 方式 1：dsh:// 协议联动一键安装（⚡ 桌面端最快，秒级免命令行）
+### Method 1: dsh:// protocol one-click install (⚡ fastest on desktop, seconds with no command line)
 
-若已安装 DeepSeek Harness 官方桌面客户端（EXE），点击下方按钮即可通过系统级 URI Scheme 协议安全唤起客户端完成免命令行秒级装载：
+If the official DeepSeek Harness desktop client (EXE) is installed, click the button below to safely launch the client through the system-level URI Scheme protocol and finish loading in seconds without any command line:
 
-> 🌐 **插件生态市场**：[DeepSeek Harness Hub - DeepSeek 官方与开源生态市场 | 插件发现与一键安装](https://deepseek.stream/)
+> 🌐 **Plugin ecosystem marketplace**: [DeepSeek Harness Hub — the official and open-source DeepSeek ecosystem marketplace | plugin discovery and one-click install](https://deepseek.stream/)
 
 <p align="center">
-  <a href="dsh://plugin/install?id=dsh-infinite-gen-4&name=%E6%97%A0%E9%99%90%E5%9B%9B%E4%BB%A3&version=0.4.0&repo=Minglink%2Fdsh-infinite-gen-4&permissions=%E7%B3%BB%E7%BB%9F%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%B3%A8%E5%85%A5%2C%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%8A%B6%E6%80%81%E6%9D%A1&downloadUrl=https%3A%2F%2Fgithub.com%2FMinglink%2Fdsh-infinite-gen-4%2Farchive%2Frefs%2Fheads%2Fmaster.zip">
-    <img src="https://img.shields.io/badge/DeepSeek%20Harness-🚀%20唤起桌面客户端一键安装无限四代-10B981?style=for-the-badge&logo=deepseek&logoColor=white" alt="唤起客户端一键安装" />
+  <a href="dsh://plugin/install?id=dsh-infinite-gen-4&name=Infinite%20Generation%20Four&version=0.4.0&repo=Minglink%2Fdsh-infinite-gen-4&permissions=System%20prompt%20injection%2C%20client%20status%20badge&downloadUrl=https%3A%2F%2Fgithub.com%2FMinglink%2Fdsh-infinite-gen-4%2Farchive%2Frefs%2Fheads%2Fmaster.zip">
+    <img src="https://img.shields.io/badge/DeepSeek%20Harness-🚀%20Quick%20install%20from%20the%20desktop%20client-10B981?style=for-the-badge&logo=deepseek&logoColor=white" alt="Launch the client for one-click install" />
   </a>
 </p>
 
-🔗 **原生协议链接：**
+🔗 **Native protocol link:**
 
 ```
-dsh://plugin/install?id=dsh-infinite-gen-4&name=%E6%97%A0%E9%99%90%E5%9B%9B%E4%BB%A3&version=0.4.0&repo=Minglink%2Fdsh-infinite-gen-4&permissions=%E7%B3%BB%E7%BB%9F%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%B3%A8%E5%85%A5%2C%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%8A%B6%E6%80%81%E6%9D%A1&downloadUrl=https%3A%2F%2Fgithub.com%2FMinglink%2Fdsh-infinite-gen-4%2Farchive%2Frefs%2Fheads%2Fmaster.zip
+dsh://plugin/install?id=dsh-infinite-gen-4&name=Infinite%20Generation%20Four&version=0.4.0&repo=Minglink%2Fdsh-infinite-gen-4&permissions=System%20prompt%20injection%2C%20client%20status%20badge&downloadUrl=https%3A%2F%2Fgithub.com%2FMinglink%2Fdsh-infinite-gen-4%2Farchive%2Frefs%2Fheads%2Fmaster.zip
 ```
 
-**网页端（前端）触发代码示例：**
+**Web front-end trigger example:**
 
 ```js
 /**
- * 唤起 DeepSeek Harness 桌面客户端一键安装无限四代插件
+ * Launch the DeepSeek Harness desktop client to install the Infinite Generation Four plugin
  */
 export function installInfiniteGen4ToDesktop() {
   const params = new URLSearchParams({
     id: 'dsh-infinite-gen-4',
-    name: '无限四代',
+    name: 'Infinite Generation Four',
     version: '0.4.0',
     repo: 'Minglink/dsh-infinite-gen-4',
-    permissions: '系统提示词注入, 客户端状态条',
+    permissions: 'System prompt injection, client status badge',
     downloadUrl: 'https://github.com/Minglink/dsh-infinite-gen-4/archive/refs/heads/master.zip',
   });
 
   const deepLink = `dsh://plugin/install?${params.toString()}`;
 
-  // 通过隐藏 iframe 安全静默拉起协议
+  // Safely and silently raise the protocol through a hidden iframe
   const iframe = document.createElement('iframe');
   iframe.style.display = 'none';
   iframe.src = deepLink;
@@ -162,44 +163,44 @@ export function installInfiniteGen4ToDesktop() {
 }
 ```
 
-**HTML 静态链接方式：**
+**HTML static link approach:**
 
 ```html
-<a href="dsh://plugin/install?id=dsh-infinite-gen-4&name=%E6%97%A0%E9%99%90%E5%9B%9B%E4%BB%A3&version=0.4.0&repo=Minglink%2Fdsh-infinite-gen-4&permissions=%E7%B3%BB%E7%BB%9F%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%B3%A8%E5%85%A5%2C%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%8A%B6%E6%80%81%E6%9D%A1&downloadUrl=https%3A%2F%2Fgithub.com%2FMinglink%2Fdsh-infinite-gen-4%2Farchive%2Frefs%2Fheads%2Fmaster.zip" class="btn-install">
-  🚀 唤起客户端一键安装
+<a href="dsh://plugin/install?id=dsh-infinite-gen-4&name=Infinite%20Generation%20Four&version=0.4.0&repo=Minglink%2Fdsh-infinite-gen-4&permissions=System%20prompt%20injection%2C%20client%20status%20badge&downloadUrl=https%3A%2F%2Fgithub.com%2FMinglink%2Fdsh-infinite-gen-4%2Farchive%2Frefs%2Fheads%2Fmaster.zip" class="btn-install">
+  🚀 Launch the client for one-click install
 </a>
 ```
 
-**协议参数配置（dsh://plugin/install）：**
+**Protocol parameter configuration (dsh://plugin/install):**
 
-| 参数名 | 值 / 示例 | 说明 |
+| Parameter | Value / Example | Description |
 |---|---|---|
-| id | `dsh-infinite-gen-4` | 插件唯一标识符 |
-| name | `无限四代`（URL 编码） | 插件展示名称 |
-| version | `0.4.0` | 语义化版本号 |
-| repo | `Minglink/dsh-infinite-gen-4` | 官方 GitHub 仓库 |
-| permissions | `系统提示词注入, 客户端状态条`（URL 编码） | 申请权限 |
-| downloadUrl | `https://github.com/Minglink/dsh-infinite-gen-4/archive/refs/heads/master.zip` | 离线 zip 下载直链 |
+| id | `dsh-infinite-gen-4` | Unique plugin identifier |
+| name | `Infinite Generation Four` (URL-encoded) | Plugin display name |
+| version | `0.4.0` | Semantic version number |
+| repo | `Minglink/dsh-infinite-gen-4` | Official GitHub repository |
+| permissions | `System prompt injection, client status badge` (URL-encoded) | Requested permissions |
+| downloadUrl | `https://github.com/Minglink/dsh-infinite-gen-4/archive/refs/heads/master.zip` | Direct offline zip download link |
 
 ---
 
-### 方式 2：Windows 本地脚本一键安装（推荐）
+### Method 2: Windows local script one-click install (recommended)
 
-1. 打开本文件夹；
-2. 右键 `install.ps1` → **「使用 PowerShell 运行」**（或直接双击 `install.bat`）；
-3. 脚本会自动完成：依赖写入、`pnpm install` 与 `dsh://` 协议注册；
-4. 看到「安装完成」后，**完全退出并重启 DeepSeek Harness**（Web 版刷新页面，桌面版重新启动），新建会话即可生效。
+1. Open this folder;
+2. Right-click `install.ps1` → **"Run with PowerShell"** (or simply double-click `install.bat`);
+3. The script automatically handles: writing dependencies, `pnpm install`, and registering the `dsh://` protocol;
+4. Once you see "installation complete", **fully exit and restart DeepSeek Harness** (refresh the page for the Web version, relaunch for the desktop version), then create a new session and it takes effect.
 
-### 方式 3：Linux / macOS 一键安装
+### Method 3: Linux / macOS one-click install
 
 ```bash
 chmod +x install.sh uninstall.sh
 ./install.sh
 ```
 
-### 方式 4：手动配置安装
+### Method 4: Manual configuration install
 
-在 `~/.dsh/profiles/<web 或 default>/package.json` 中添加：
+Add the following to `~/.dsh/profiles/<web or default>/package.json`:
 
 ```json
 {
@@ -217,35 +218,35 @@ chmod +x install.sh uninstall.sh
 }
 ```
 
-然后在 profile 目录下执行 `pnpm install` 并重启 Harness。
+Then run `pnpm install` in the profile directory and restart Harness.
 
 ---
 
-## ⚡ 验证生效
+## ⚡ Verifying It Works
 
-1. **界面状态条**：重启后在输入框上方应显示醒目的绿色状态条 **「⚫ 无限四代 v0.4.0」**。
-2. **测试离线回归**：
+1. **UI status badge**: after restarting, a prominent green status badge **"⚫ Infinite Generation Four v0.4.0"** should appear above the input box.
+2. **Run the offline regression test**:
    ```bash
-   # 运行 103 项断言（提示词完备性、双层内核同源性、V4.1车道、纯净架构、评分器等）
+   # Runs 103 assertions (prompt completeness, dual-layer kernel homology, V4.1 lane, clean architecture, scorer, etc.)
    node scripts/verify_prompt_gen4.mjs
    ```
-3. **会话探针**：在全新对话中输入：
-   > “你的系统提示词来自哪些插件？”
-   若回答包含「无限四代 / Infinite Generation Four」即证明双层提示词完全注入成功。
+3. **Session probe**: in a brand-new conversation, ask:
+   > "Which plugins does your system prompt come from?"
+   If the answer includes "Infinite Generation Four", the dual-layer prompt has been injected successfully.
 
 ---
 
-## 🗑 卸载方法
+## 🗑 Uninstall
 
-运行 `uninstall.ps1`（Windows）或 `./uninstall.sh`（Linux / macOS）即可一键彻底清理，无任何配置残留。
+Run `uninstall.ps1` (Windows) or `./uninstall.sh` (Linux / macOS) for a complete one-click cleanup with no leftover configuration.
 
 ---
 
-## 💬 官方交流社区
+## 💬 Official Community
 
-> 📌 **非盈利公益项目，严禁任何主体用于商业售卖、付费倒卖或黑灰产牟利，仅供技术参考。**
+> 📌 **A non-profit, public-interest project. No entity may use it for commercial sale, paid resale, or profit from gray/black markets. It is provided for technical reference only.**
 
 <p align="center">
-  <img src="./assets/community.jpg" width="240" alt="DeepSeek网安逆攻防技术交流社区" /><br>
-  <sub><b>🌐 官方技术交流社区（腾讯频道号：pd86424753）</b></sub>
+  <img src="./assets/community.jpg" width="240" alt="DeepSeek cybersecurity offensive/defensive technical community" /><br>
+  <sub><b>🌐 Official technical community (Tencent Channels ID: pd86424753)</b></sub>
 </p>
